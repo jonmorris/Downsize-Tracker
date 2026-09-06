@@ -12,6 +12,7 @@
   --accent-ink: #ffffff;
   --accent-soft: rgba(196, 100, 63, 0.12);
   --danger: #a8422f;
+  --projected: #e0a72c;
   --shadow: 0 1px 2px rgba(60, 45, 30, 0.05), 0 6px 18px rgba(60, 45, 30, 0.06);
   --shadow-lift: 0 8px 28px rgba(60, 45, 30, 0.16);
   --r-lg: 20px;
@@ -37,6 +38,7 @@
     --accent-ink: #241207;
     --accent-soft: rgba(224, 133, 88, 0.16);
     --danger: #e0705a;
+    --projected: #f0c14b;
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 6px 18px rgba(0, 0, 0, 0.32);
     --shadow-lift: 0 8px 28px rgba(0, 0, 0, 0.5);
     color-scheme: dark;
@@ -56,6 +58,7 @@
   --accent-ink: #241207;
   --accent-soft: rgba(224, 133, 88, 0.16);
   --danger: #e0705a;
+  --projected: #f0c14b;
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 6px 18px rgba(0, 0, 0, 0.32);
   --shadow-lift: 0 8px 28px rgba(0, 0, 0, 0.5);
   color-scheme: dark;
@@ -196,6 +199,16 @@ a { color: var(--accent); }
 .bar--thin { height: 7px; }
 .bar--done > i { background: var(--good, #6f7f4b); }
 
+/* Two fills sharing one track, both anchored at zero rather than stacked: the
+   projected total sits behind, actual sales paint over the top of it. */
+.bar--layered { position: relative; }
+.bar--layered > i { position: absolute; top: 0; bottom: 0; left: 0; height: auto; }
+.bar--layered > .bar-projected { background: var(--projected); }
+
+.legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12.5px; color: var(--ink-2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+
 .goal-mini { display: flex; flex-direction: column; gap: 7px; }
 .goal-mini .line {
   display: flex;
@@ -245,14 +258,15 @@ a { color: var(--accent); }
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.stat .dot {
+.dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
   display: inline-block;
-  margin-right: 5px;
-  vertical-align: 1px;
+  flex: 0 0 auto;
+  background: var(--ink-3);
 }
+.stat .dot { margin-right: 5px; vertical-align: 1px; }
 
 /* ---------- buttons ---------- */
 .btn {
@@ -728,3 +742,7 @@ a { color: var(--accent); }
   border: 1px solid var(--accent);
   font-variant-numeric: tabular-nums;
 }
+
+/* after the base .dot so these win at equal specificity */
+.dot--sold { background: var(--accent); }
+.dot--projected { background: var(--projected); }

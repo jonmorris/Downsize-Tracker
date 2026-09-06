@@ -9,7 +9,9 @@ own device.
 ## What it does
 
 **Dashboard** — sized to fit a phone screen without scrolling. Your money goal
-with progress, your item-count goal, a tile per state (not dealt with, listed,
+with two overlapping bars on one track: yellow for where you'd land if
+everything still on the shelf sold at your estimates, terracotta painted over
+it for what you've actually banked. Then your item-count goal, a tile per state (not dealt with, listed,
 sold, given away, thrown away, estimated value still on the shelf), and the few
 highest-value things still in the house. Every tile is tappable and jumps to the
 matching filter.

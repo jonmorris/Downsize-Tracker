@@ -3,7 +3,7 @@ import { ACCENTS } from '../defaults'
 import { useStats } from '../stats'
 import { useStore } from '../store'
 import type { Filters } from '../types'
-import { money, moneyShort } from '../util'
+import { money, moneyShort, pct } from '../util'
 import { IconPlus } from '../components/Icons'
 
 interface Props {
@@ -25,6 +25,9 @@ export function Dashboard({ onAdd, onJump }: Props) {
       .slice(0, 3)
   }, [items, methods])
   const remaining = Math.max(0, s.moneyGoal - s.moneyEarned)
+  // Where the goal lands if everything still on the shelf sells at its estimate.
+  const projected = s.moneyEarned + s.estRemaining
+  const projectedPct = pct(projected, s.moneyGoal)
   const itemsLeft = Math.max(0, s.itemGoal - s.itemsDone)
 
   return (
@@ -35,13 +38,26 @@ export function Dashboard({ onAdd, onJump }: Props) {
           <span className="goal-pct">{s.moneyPct}%</span>
         </div>
         <div className="amount">{money(s.moneyEarned)}</div>
-        <div className="bar">
+        <div className="bar bar--layered">
+          {s.estRemaining > 0 && <i className="bar-projected" style={{ width: `${projectedPct}%` }} />}
           <i style={{ width: `${s.moneyPct}%` }} />
         </div>
         <div className="of">
           of <b>{money(s.moneyGoal)}</b>
           {remaining > 0 ? ` · ${money(remaining)} to go` : ' · goal reached 🎉'}
         </div>
+        {s.estRemaining > 0 && (
+          <div className="legend">
+            <span>
+              <i className="dot dot--sold" />
+              <b>{money(s.moneyEarned)}</b> sold
+            </span>
+            <span>
+              <i className="dot dot--projected" />
+              <b>{money(projected)}</b> if it all sells at estimate
+            </span>
+          </div>
+        )}
       </section>
 
       <section className="card card--flat goal-mini">

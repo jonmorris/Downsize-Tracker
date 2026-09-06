@@ -263,7 +263,7 @@ export function SettingsScreen({ toast }: Props) {
         <h2>Your data</h2>
         <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           <p className="hint" style={{ fontSize: 13 }}>
-            Everything lives on this device only — {items.length} item{items.length === 1 ? '' : 's'} so far.
+            Everything lives on this device only — {items.length} entr{items.length === 1 ? 'y' : 'ies'} so far.
             Clearing your browser data would wipe it, so export a backup now and then.
           </p>
           <button className="btn btn--ghost btn--block" onClick={() => void exportBackup()}>

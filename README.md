@@ -21,6 +21,12 @@ selling, or a single `Given away` / `Thrown away` for everything else. Marking
 something sold pops a sheet for the real sale price, which is what counts toward
 your goal.
 
+An entry can cover more than one thing: **How many** on the item form defaults
+to 1, but setting it to 50 for "all my Pokémon cards" makes that single entry
+count as 50 toward your item goal and the dashboard tiles, without 50 rows to
+tick off. Values stay per-entry — the estimate and the sale price are for the
+whole lot.
+
 **Settings** — both goals, plus full management of *plans* (what you do with a
 thing) and *categories*: add, rename, reorder, delete. Backup export/import, a
 theme switch, and a reset.

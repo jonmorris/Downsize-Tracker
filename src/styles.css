@@ -506,7 +506,7 @@ a { color: var(--accent); }
   text-transform: uppercase;
   color: var(--ink-3);
 }
-.field .hint { font-size: 12px; color: var(--ink-3); }
+.hint, .field .hint { font-size: 12px; color: var(--ink-3); line-height: 1.35; }
 .row { display: flex; gap: 10px; }
 .row > * { flex: 1; min-width: 0; }
 .money-input { position: relative; display: flex; align-items: center; }
@@ -720,3 +720,11 @@ a { color: var(--accent); }
 .shelf li { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; font-size: 14px; }
 .shelf .nm { color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .shelf .vl { flex: 0 0 auto; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* a multi-item entry announces how many it covers */
+.tag--qty {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  font-variant-numeric: tabular-nums;
+}

@@ -4,7 +4,7 @@ import { Photo } from '../components/Photo'
 import { Sheet } from '../components/Sheet'
 import { useStore } from '../store'
 import type { Item } from '../types'
-import { normalizeTag, parseMoney } from '../util'
+import { normalizeTag, parseCount, parseMoney } from '../util'
 
 interface Props {
   item: Item | null
@@ -24,6 +24,7 @@ export function ItemEditor({ item, onClose, onSaved }: Props) {
   const [methodId, setMethodId] = useState(item?.methodId ?? liveMethods[0]?.id ?? '')
   const [categoryId, setCategoryId] = useState(item?.categoryId ?? '')
   const [value, setValue] = useState(item?.estValue !== null && item ? String(item.estValue) : '')
+  const [quantity, setQuantity] = useState(item ? String(item.quantity) : '1')
   const [tags, setTags] = useState<string[]>(item?.tags ?? [])
   const [tagDraft, setTagDraft] = useState('')
   const [notes, setNotes] = useState(item?.notes ?? '')
@@ -73,6 +74,7 @@ export function ItemEditor({ item, onClose, onSaved }: Props) {
         name: name.trim(),
         categoryId: categoryId || null,
         methodId,
+        quantity: parseCount(quantity),
         estValue: parseMoney(value),
         tags,
         notes,
@@ -204,20 +206,40 @@ export function ItemEditor({ item, onClose, onSaved }: Props) {
         </div>
       </div>
 
-      <div className="field">
-        <label htmlFor="item-value">Estimated value</label>
-        <div className="money-input">
-          <span>$</span>
+      <div className="row">
+        <div className="field">
+          <label htmlFor="item-value">Estimated value</label>
+          <div className="money-input">
+            <span>$</span>
+            <input
+              id="item-value"
+              className="input"
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              inputMode="decimal"
+              placeholder="0"
+            />
+          </div>
+        </div>
+        <div className="field">
+          <label htmlFor="item-quantity">How many</label>
           <input
-            id="item-value"
+            id="item-quantity"
             className="input"
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            inputMode="decimal"
-            placeholder="0"
+            type="number"
+            min={1}
+            step={1}
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+            onBlur={() => setQuantity(String(parseCount(quantity)))}
+            inputMode="numeric"
           />
         </div>
       </div>
+      <span className="hint">
+        One entry can cover a pile — "all my Pokémon cards" as 50 counts 50 toward your item goal.
+        The value is for the whole lot.
+      </span>
 
       <div className="field">
         <span className="field-label">Tags</span>

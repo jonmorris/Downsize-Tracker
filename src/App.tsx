@@ -5,6 +5,7 @@ import { ItemEditor } from './screens/ItemEditor'
 import { ItemsList } from './screens/ItemsList'
 import { ProcessSheet } from './screens/ProcessSheet'
 import { SettingsScreen } from './screens/SettingsScreen'
+import { useStats } from './stats'
 import { useStore } from './store'
 import { EMPTY_FILTERS, type Filters, type Item } from './types'
 
@@ -17,7 +18,8 @@ const TABS: { id: Tab; label: string; Icon: (p: { className?: string }) => JSX.E
 ]
 
 export function App() {
-  const { ready, error, items, methods, setStatus, processItem } = useStore()
+  const { ready, error, methods, setStatus, processItem } = useStore()
+  const stats = useStats()
   const [tab, setTab] = useState<Tab>('home')
   const [filters, setFilters] = useState<Filters>(EMPTY_FILTERS)
   /** undefined = closed, null = adding, Item = editing */
@@ -72,9 +74,15 @@ export function App() {
     )
   }
 
+  // Entries can cover several things each, so say both numbers when they differ.
+  const itemsSubtitle =
+    stats.total === stats.entries
+      ? `${stats.total} item${stats.total === 1 ? '' : 's'} tracked`
+      : `${stats.total} items across ${stats.entries} entries`
+
   const subtitle =
     tab === 'items'
-      ? `${items.length} item${items.length === 1 ? '' : 's'} tracked`
+      ? itemsSubtitle
       : tab === 'settings'
         ? 'Goals, plans, categories, backups'
         : new Date().toLocaleDateString(undefined, { weekday: 'long', month: 'short', day: 'numeric' })

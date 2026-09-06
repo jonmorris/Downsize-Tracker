@@ -1,5 +1,6 @@
 import { DEFAULT_CATEGORIES, DEFAULT_METHODS, DEFAULT_SETTINGS } from './defaults'
 import type { Category, Item, Method, Settings } from './types'
+import { parseCount } from './util'
 
 const DB_NAME = 'downsize-tracker'
 const DB_VERSION = 1
@@ -105,12 +106,15 @@ export async function loadAll(): Promise<LoadedData> {
   }
 
   return {
-    items,
+    items: items.map(normalizeItem),
     categories: seededCategories.sort((a, b) => a.order - b.order),
     methods: seededMethods.sort((a, b) => a.order - b.order),
     settings: { ...DEFAULT_SETTINGS, ...storedSettings },
   }
 }
+
+/** Items stored before `quantity` existed read back as covering one thing. */
+export const normalizeItem = (item: Item): Item => ({ ...item, quantity: parseCount(item.quantity) })
 
 export const savePhoto = (id: string, blob: Blob): Promise<IDBValidKey> =>
   put('photos', { id, blob })

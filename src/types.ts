@@ -29,6 +29,12 @@ export interface Item {
   name: string
   categoryId: string | null
   methodId: string
+  /**
+   * How many physical things this one entry covers — "all my Pokémon cards"
+   * might be 50. Counts as `quantity` toward the item goal and the dashboard
+   * tiles; values below stay per-entry, since a lot sells for one price.
+   */
+  quantity: number
   /** What you think it is worth, in dollars. */
   estValue: number | null
   /** What it actually went for. Only set for money-tracking methods. */

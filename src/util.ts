@@ -26,6 +26,12 @@ export const parseMoney = (raw: string): number | null => {
   return Number.isFinite(n) ? Math.round(n * 100) / 100 : null
 }
 
+/** A whole count of at least 1 — anything unparseable falls back to 1. */
+export const parseCount = (raw: string | number | null | undefined): number => {
+  const n = typeof raw === 'number' ? raw : Number.parseInt(String(raw ?? '').replace(/[^0-9]/g, ''), 10)
+  return Number.isFinite(n) && n >= 1 ? Math.floor(n) : 1
+}
+
 export const relativeDate = (ts: number): string => {
   const days = Math.floor((Date.now() - ts) / 86400000)
   if (days <= 0) return 'today'

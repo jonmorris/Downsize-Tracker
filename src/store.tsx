@@ -16,6 +16,7 @@ export interface ItemDraft {
   name: string
   categoryId: string | null
   methodId: string
+  quantity: number
   estValue: number | null
   tags: string[]
   notes: string
@@ -117,6 +118,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         name: draft.name.trim(),
         categoryId: draft.categoryId,
         methodId: draft.methodId,
+        quantity: draft.quantity,
         estValue: draft.estValue,
         actualValue: null,
         status: 'todo',
@@ -338,7 +340,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       mergeById(backup.categories ?? [], existing?.categories ?? []),
     )
     const methods = resequence(mergeById(backup.methods ?? [], existing?.methods ?? []))
-    const items = mergeById(backup.items ?? [], existing?.items ?? [])
+    const items = mergeById(backup.items ?? [], existing?.items ?? []).map(db.normalizeItem)
     const settings = { ...DEFAULT_SETTINGS, ...(backup.settings ?? {}) }
 
     for (const [id, dataUrl] of Object.entries(backup.photos ?? {})) {

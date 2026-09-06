@@ -42,6 +42,7 @@ export function ItemCard({ item, method, category, onProcess, onList, onRevert, 
         </div>
 
         <div className="item-meta">
+          {item.quantity > 1 && <span className="tag tag--qty">×{item.quantity}</span>}
           <span className="tag tag--method" style={{ background: accent }}>
             {done ? (method?.doneLabel ?? 'Done') : (method?.label ?? 'No method')}
           </span>

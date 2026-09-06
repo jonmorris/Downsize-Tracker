@@ -38,10 +38,12 @@ custom plans decide for themselves.
 
 ## Getting it on your phone
 
-1. In the repo's **Settings → Pages**, set **Source** to **GitHub Actions**.
-2. Push to `main` (or any `claude/**` branch) — the workflow builds and deploys.
-3. On your phone, open `https://<your-username>.github.io/Downsize-Tracker/`.
-4. **iOS:** Share → *Add to Home Screen*. **Android:** menu → *Install app*.
+1. Push to `main` (or any `claude/**` branch) — the workflow builds, switches
+   Pages on if it isn't already, and deploys. If it ever fails at
+   *Configure Pages*, set **Settings → Pages → Source** to **GitHub Actions**
+   by hand and re-run it.
+2. On your phone, open `https://<your-username>.github.io/Downsize-Tracker/`.
+3. **iOS:** Share → *Add to Home Screen*. **Android:** menu → *Install app*.
 
 After that it launches full-screen from its own icon and works with no signal.
 

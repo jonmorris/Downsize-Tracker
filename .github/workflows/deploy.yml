@@ -26,7 +26,11 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      # Turns Pages on (source: GitHub Actions) the first time this runs, so the
+      # repo needs no manual setup.
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

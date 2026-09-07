@@ -8,7 +8,8 @@ own device.
 
 ## What it does
 
-**Dashboard** — sized to fit a phone screen without scrolling. Your money goal
+**Dashboard** — compact enough to read at a glance, and free to scroll when it
+needs to. Your money goal
 with two overlapping bars on one track: yellow for where you'd land if
 everything still on the shelf sold at your estimates, terracotta painted over
 it for what you've actually banked. Then your item-count goal, a tile per state (not dealt with, listed,

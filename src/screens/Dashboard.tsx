@@ -22,7 +22,7 @@ export function Dashboard({ onAdd, onJump }: Props) {
     return items
       .filter((i) => i.status !== 'done' && moneyMethods.has(i.methodId) && (i.estValue ?? 0) > 0)
       .sort((a, b) => (b.estValue ?? 0) - (a.estValue ?? 0))
-      .slice(0, 3)
+      .slice(0, 5)
   }, [items, methods])
   const remaining = Math.max(0, s.moneyGoal - s.moneyEarned)
   // Where the goal lands if everything still on the shelf sells at its estimate.

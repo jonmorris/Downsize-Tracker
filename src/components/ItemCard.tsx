@@ -30,13 +30,11 @@ export function ItemCard({ item, method, category, onProcess, onList, onRevert, 
           <h3>{item.name}</h3>
           {showActual ? (
             <div className="item-price item-price--actual">
-              {money(item.actualValue ?? 0)}
-              <small>got</small>
+              {money(item.actualValue ?? 0)} <small>final</small>
             </div>
           ) : item.estValue !== null ? (
             <div className="item-price">
-              {money(item.estValue)}
-              <small>est.</small>
+              {money(item.estValue)} <small>est.</small>
             </div>
           ) : null}
         </div>

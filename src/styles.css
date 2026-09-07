@@ -121,6 +121,7 @@ a { color: var(--accent); }
   flex-direction: column;
   gap: 12px;
   padding-top: 2px;
+  padding-bottom: 0;
 }
 
 /* ---------- tab bar ---------- */
@@ -294,7 +295,14 @@ a { color: var(--accent); }
 .add-cta {
   display: flex;
   gap: 10px;
-  padding-top: 2px;
+  /* Sticks to the bottom of the scrollport so it stays reachable however long
+     the dashboard grows; the fade keeps content legible as it passes behind. */
+  position: sticky;
+  bottom: 0;
+  z-index: 6;
+  margin: 2px -16px 0;
+  padding: 20px 16px 14px;
+  background: linear-gradient(to top, var(--bg) 72%, transparent);
 }
 .icon-btn {
   width: var(--tap);
@@ -676,7 +684,7 @@ a { color: var(--accent); }
 .toast {
   position: fixed;
   left: 50%;
-  bottom: calc(76px + env(safe-area-inset-bottom));
+  bottom: calc(96px + env(safe-area-inset-bottom));
   transform: translateX(-50%);
   z-index: 80;
   background: var(--ink);
